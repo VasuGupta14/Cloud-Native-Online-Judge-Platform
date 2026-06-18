@@ -1,80 +1,69 @@
-# Novus-Code - Cloud-Native Online IDE
+# Cloud-Native Online Judge Platform
 
-Novus-Code is a cloud-native Online Integrated Development Environment (IDE) that enables users to write, manage, and execute code directly from the browser. It provides isolated development environments, real-time terminal interaction, and persistent cloud storage for projects.
+A scalable online judge inspired by LeetCode and HackerRank that enables users to write, compile, and execute code securely in isolated environments with real-time feedback and asynchronous execution pipelines.
 
-## Features
+## 🚀 Features
 
-- Advanced code editor powered by **Monaco Editor** with syntax highlighting and code completion.
-- Interactive browser-based terminal using **xterm.js**.
-- Dynamic provisioning of isolated user environments through **Kubernetes**.
-- Real-time file synchronization and terminal streaming using **Socket.io**.
-- Persistent project storage integrated with **AWS S3**.
-- Secure user authentication and scalable backend architecture.
+* Advanced code editor powered by **Monaco Editor** with syntax highlighting and autocompletion.
+* Interactive browser-based terminal using **xterm.js**.
+* Secure multi-language code compilation and execution.
+* Real-time output streaming using **WebSockets (Socket.io)**.
+* Asynchronous execution pipelines backed by **Redis**.
+* Persistent storage for submissions and user data using **PostgreSQL**.
+* Automated CI/CD workflows using **GitHub Actions**.
 
-## Architecture
+## 🏗 Architecture
 
 The project consists of three services:
 
 ### Frontend
 
-- Built with **React**, **Vite**, and **TailwindCSS**.
-- Hosts the Monaco Editor, terminal interface, and file explorer.
+* Built with **React**, **Vite**, and **TailwindCSS**.
+* Hosts the Monaco Editor, terminal interface, and submission dashboard.
 
 ### Backend API
 
-- Developed using **Node.js**, **Express**, and **TypeScript**.
-- Handles authentication, file management, and database operations.
-- Streams terminal output and file updates via **WebSockets**.
+* Developed using **Node.js**, **Express**, and **TypeScript**.
+* Handles authentication, submission management, and database operations.
+* Streams execution logs and results through **WebSockets**.
 
-### Kubernetes Controller
+### Execution Workers
 
-- Dedicated service using **@kubernetes/client-node**.
-- Responsible for creating and managing isolated user-specific pods.
+* Consume jobs from **Redis** queues.
+* Compile and execute user code securely.
+* Return execution status and outputs to the backend.
 
-## Tech Stack
+## 🛠 Tech Stack
 
-| Layer | Technologies |
-|---|---|
-| Frontend | React, Vite, TailwindCSS, Monaco Editor, xterm.js |
-| Backend | Node.js, Express, TypeScript, Socket.io |
-| Database | PostgreSQL, Drizzle ORM |
-| Infrastructure | Kubernetes, Docker, AWS S3 |
-| Validation | Zod |
+| Layer      | Technologies                                      |
+| ---------- | ------------------------------------------------- |
+| Frontend   | React, Vite, TailwindCSS, Monaco Editor, xterm.js |
+| Backend    | Node.js, Express, TypeScript, Socket.io           |
+| Database   | PostgreSQL                                        |
+| Queue      | Redis                                             |
+| CI/CD      | GitHub Actions                                    |
+| Validation | Zod                                               |
 
-## Getting Started
+## 🚦 Getting Started
 
 ### Prerequisites
 
-- Node.js (v18+)
-- PostgreSQL
-- Kubernetes Cluster (Minikube or Docker Desktop)
-- AWS S3 Credentials
+* Node.js (v18+)
+* PostgreSQL
+* Redis
 
 ### Installation
 
 ```bash
-git clone https://github.com/<username>/novus-code.git
-cd novus-code
+git clone https://github.com/<username>/<repository-name>.git
+cd <repository-name>
 ```
 
-Install dependencies for each service:
+Install dependencies:
 
 ```bash
-cd front-end
 npm install
 npm run dev
 ```
 
-```bash
-cd code
-npm install
-npm run dev
-```
-
-```bash
-cd k8s
-npm install
-npm run dev
-```
-
-Configure the required environment variables before starting the backend services.
+Configure the required environment variables before starting the services.
